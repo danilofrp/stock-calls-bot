@@ -24,7 +24,7 @@ def get_calls():
     token, cookies = get_token_and_cookies()
     response = login_to_call_history(token, cookies)
     
-    soup = BeautifulSoup(response.text)
+    soup = BeautifulSoup(response.text, "html.parser")
     cards = soup.find_all('div', attrs = {'class': 'card'})
     calls = list(map(card_to_dict, cards))
     return calls
@@ -33,7 +33,7 @@ def get_calls():
 def get_token_and_cookies():
     response = requests.get(url = base_url)
     data = response.text
-    soup = BeautifulSoup(data)
+    soup = BeautifulSoup(data, "html.parser")
     hidden_input_tag = soup.find('input', attrs = {'name': '_token'})
     token = hidden_input_tag.get('value')
     cookies = response.cookies
