@@ -2,9 +2,11 @@ import os
 import utils
 import telegram
 
+base_path = os.path.split(os.path.realpath(__file__))[0]
+
 class TelegramBot():
     def __init__(self):
-        bot_config_file = os.path.join('.', 'bot_specs', '') + 'bot_config.json'
+        bot_config_file = os.path.join(base_path, 'bot_specs', '') + 'bot_config.json'
         bot_config = utils.read_json(bot_config_file)
             
         self.__bot_token = bot_config['token']

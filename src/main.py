@@ -9,14 +9,15 @@ from errors import LoginError
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-last_call_file = os.path.join('.', 'log', '') + 'last_sent_call.json'
+base_path = os.path.split(os.path.realpath(__file__))[0]
+
+last_call_file = os.path.join(base_path, 'log', '') + 'last_sent_call.json'
 
 
 def main():
     logger = log.get_logger(name = 'scrapper')
     messenger_bot = messenger.TelegramBot()
     
-
     try:
         calls = scrapper.get_calls()
     except LoginError as e:

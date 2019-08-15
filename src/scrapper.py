@@ -9,12 +9,15 @@ from bs4 import BeautifulSoup
 
 datetime_regex = re.compile(r'\d{2}/\d{2}/\d{4} \d{1,2}:\d{2}')
 
+base_path = os.path.split(os.path.realpath(__file__))[0]
+
 base_url = 'https://grandetacada.com.br'
 login_url = 'https://grandetacada.com.br/login'
-login_credencials_file = os.path.join('.', 'credentials', '') + 'login_credentials.json'
+
+login_credencials_file = os.path.join(base_path, 'credentials', '') + 'login_credentials.json'
 login_credentials = utils.read_json(login_credencials_file)
 
-last_call_file = os.path.join('.', 'log', '') + 'last_sent_call.json'
+last_call_file = os.path.join(base_path, 'log', '') + 'last_sent_call.json'
 
 
 def get_calls():
