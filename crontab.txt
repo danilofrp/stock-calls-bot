@@ -1,0 +1,1 @@
+*/5 * * * * /home/danilofrp/workspace/stock-calls-bot/run_scrapper.sh > /home/danilofrp/workspace/stock-calls-bot/cron.log 2>&1
