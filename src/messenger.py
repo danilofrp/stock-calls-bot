@@ -5,14 +5,10 @@ import telegram
 base_path = os.path.split(os.path.realpath(__file__))[0]
 
 class TelegramBot():
-    def __init__(self):
-        bot_config_file = os.path.join(base_path, 'bot_specs', '') + 'bot_config.json'
-        bot_config = utils.read_json(bot_config_file)
-            
-        self.__bot_token = bot_config['token']
-        self.__chat_ids = bot_config['chat_ids']
+    def __init__(self, token, chat_ids):
+        self.__chat_ids = chat_ids
         
-        self.__bot = telegram.Bot(token = self.__bot_token)
+        self.__bot = telegram.Bot(token = token)
         
     def send_message(self, message, chat_id = None):
         if chat_id:

@@ -13,21 +13,27 @@ base_path = os.path.split(os.path.realpath(__file__))[0]
 
 last_call_file = os.path.join(base_path, 'log', '') + 'last_sent_call.json'
 
+bot_config_file = os.path.join(base_path, 'bot_specs', '') + 'bot_config.json'
+bot_config = utils.read_json(bot_config_file)
 
 def main():
-    logger = log.get_logger(name = 'scrapper')
-    messenger_bot = messenger.TelegramBot()
-    
     try:
-        calls = scrapper.get_calls()
-    except LoginError as e:
-        logger.error(e)
-        return
+        logger = log.get_logger(name = 'scrapper')
+        messenger_bot = messenger.TelegramBot(**bot_config)
+        
+        try:
+            calls = scrapper.get_calls()
+        except LoginError as e:
+            logger.error(e)
+            return
 
-    calls_to_send = define_calls_to_send(calls)
-    for call in calls_to_send:
-        messenger_bot.send_message(call['message'])
-        save_last_call_sent(call)
+        calls_to_send = define_calls_to_send(calls)
+        for call in calls_to_send:
+            messenger_bot.send_message(call['message'])
+            save_last_call_sent(call)
+    except Exception as e:
+            logger.error(e)
+            return
 
 
 def define_calls_to_send(calls):
