@@ -1,8 +1,4 @@
-import os
-import utils
 import telegram
-
-base_path = os.path.split(os.path.realpath(__file__))[0]
 
 class TelegramBot():
     def __init__(self, token, chat_ids):
