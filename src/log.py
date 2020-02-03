@@ -3,8 +3,7 @@ import logging
 
 base_path = os.path.split(os.path.realpath(__file__))[0]
 
-def get_logger(name = None):
-    name = name if name else __name__
+def get_logger(name):
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
 
